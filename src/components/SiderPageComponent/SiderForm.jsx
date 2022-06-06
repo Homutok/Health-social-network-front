@@ -41,7 +41,7 @@ const items = [
         getItem('Дневник тренировок', 'training', <InsertRowAboveOutlined />),
         getItem('Дневник питания', 'food', < HddOutlined />),
     ]),
-    getItem('Новости', 'feed', <CompassOutlined />, [
+    getItem('Новости', 'blog', <CompassOutlined />, [
         getItem('Все', 'all', < DingtalkOutlined />),
         getItem('Фитнес', 'fitnes', <FireOutlined />),
         getItem('Рецепты', 'recipe', <CoffeeOutlined />),

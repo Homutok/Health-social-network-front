@@ -14,5 +14,6 @@ export default combineReducers({
     todo: todoReducer,
     login: loginReducer,
     health: healthReducer,
-    food:foodReducer
+    food:foodReducer,
+    blog:blogReducer
 })
