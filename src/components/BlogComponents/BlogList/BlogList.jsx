@@ -15,9 +15,9 @@ const BlogList = (props) => {
     }, [props.load])
 
     return <Row type="flex" justify="center" align="middle" >
-        {   
+        {
             isLoad
-                ? posts.map((post) => <BlogPost data={post} isLoad={isLoad}/>)
+                ? posts.map((post) =><BlogPost data={post} isLoad={isLoad} key={post.id} />)
                 : <PostLoading />
         }
     </Row>

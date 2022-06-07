@@ -15,7 +15,7 @@ const BlogPage = (props) => {
         parent='Блог'
         child='Все записи'
     >
-        <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
+        <Space direction="vertical" size="middle" style={{ display: 'flex' }}  wrap>
             <Row type="flex" justify="start" style={{ margin: '1%' }} >
                 <NewPostButton />
             </Row>

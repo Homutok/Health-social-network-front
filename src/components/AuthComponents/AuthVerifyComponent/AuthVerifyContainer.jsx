@@ -16,7 +16,7 @@ function mapDispatchToProps(dispatch) {
             const access = localStorage.getItem("access");
             (refresh === null && access === null) ?
                 dispatch(logout()) :
-                dispatch(verify({ refresh: refresh, access: access }));
+                dispatch(verify());
         },
         loginConfirm: () => {
             dispatch(loginConfirm())

@@ -16,8 +16,9 @@ export const loginUsersSuccess = (data) => ({
     }
 })
 
-export const verifyUsersSuccess = () => ({
+export const verifyUsersSuccess = (data) => ({
     type: LOGIN_CHECK,
+    payload: data
 })
 
 export const refreshUsersToken = (data) => ({

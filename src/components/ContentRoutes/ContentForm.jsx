@@ -9,6 +9,7 @@ import ToDoContainer from "../DiariesComponents/ToDoPageComponent/ToDoContainer"
 import HealthContainer from "../DiariesComponents/HealthPageComponent/HealthContainer";
 import FoodDiaryContainer from "../DiariesComponents/FoodDiaryPageComponent/FoodDiaryContainer";
 import BlogListContainer from "../BlogComponents/BlogList/BlogListContainer";
+import PostContainer from "../BlogComponents/PostDetail/PostContainer";
 
 
 const ContentForm = () => {
@@ -25,7 +26,10 @@ const ContentForm = () => {
             <Route path="login" element={<LoginContainer/>} />
             <Route path="exit" element={<LogoutContainer/>} />
             <Route path="profile" element={<ProfileContainer />} />
+            <Route path="blog/:id" element={<PostContainer />} />
             <Route path="blog-all" element={<BlogListContainer />} />
+            <Route path="blog-fitnes" element={<BlogListContainer />} />
+            <Route path="blog-recipe" element={<BlogListContainer />} />
             <Route path="edit/image" element={<ChoosePhotoContainer />} />
             <Route path="diaries-todo" element={<ToDoContainer />} />
             <Route path="diaries-health" element={<HealthContainer />} />

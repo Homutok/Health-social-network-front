@@ -1,0 +1,18 @@
+import React  from 'react';
+import { Button } from 'antd';
+import { EditOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
+
+
+const EditPostButton = (props) => {
+    const navigate = useNavigate();
+
+    const editPostAndRedirect = () => {
+        navigate("/blog/action/edit=" + props.id)
+    }
+    return <Button type="primary" shape="round" span={24} offset={16}>
+        <EditOutlined />
+        Edit Post
+    </Button>
+}
+export default EditPostButton

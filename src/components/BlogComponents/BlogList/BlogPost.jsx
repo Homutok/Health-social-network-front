@@ -1,4 +1,5 @@
 import { Card, Image, Row } from "antd";
+import { Link } from "react-router-dom";
 import LikeButton from "./BlogButtonLike";
 import MoreButton from "./BlogButtonMore";
 import PostText from "./BlogPostText";
@@ -11,6 +12,7 @@ const BlogPost = (props) => {
         align="middle"
         title={props.data.post_name}
         type="inner"
+        justify="center"
         style={{
             width: '70%',
             margin: '3%',
@@ -27,7 +29,9 @@ const BlogPost = (props) => {
                 : null
         }
     >
-        <PostText postData={props.data} fulltext={false} />
+        <Link to={"/blog/" + props.data.id} style={{ color: 'black' }}>
+            <PostText postData={props.data} fulltext={false} />
+        </Link>
         <Row>
             <LikeButton />
             <MoreButton />

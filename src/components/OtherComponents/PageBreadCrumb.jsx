@@ -16,6 +16,7 @@ const PageBreadCrumb = (props) => {
             style={{
                 padding: 24,
                 minHeight: 360,
+                backgroundColor:'#FCFCFC'
             }}
         >
             <AuthVerifyContainer/>
