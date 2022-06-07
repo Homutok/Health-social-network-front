@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Row, Col, Space } from 'antd';
+import { Card, Row, Col, Space, Image } from 'antd';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import CommentList from './PostCommentsList'
@@ -39,12 +39,22 @@ const PostDetail = (props) => {
                 <Row type="flex" justify="center" align="middle" key={post.id}>
                     <Card
                         hoverable
-                        title={post.label}
+                        title={post.post_name}
                         align="middle"
                         style={{
-                            width: '50%',
+                            width: '70%',
+                            margin: '3%',
                         }}
                         loading={!isLoaded}
+                        cover={
+                            !!post.post_image
+                                ? <Image
+                                    alt="example"
+                                    src={post.post_image}
+                                    width='70%'
+                                />
+                                : null
+                        }
                     >
                         <PostText postData={post} fulltext={true} />
                         <Row>
