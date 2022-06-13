@@ -1,12 +1,9 @@
-import axios from 'axios';
 import {
     getDataImageSuccess,
     getDataImageFailure
 } from '../../../actionCreators/User/PhotoImageActionCreators';
+import { instance } from '../../instance-api';
 
-const instance = axios.create({
-    baseURL: 'http://127.0.0.1:8000/api/'
-});
 export const getPhotoDataList = () => async dispatch => {
     await instance.get('Image/')  
         .then((response) =>

@@ -1,19 +1,15 @@
-import axios from 'axios';
 import {
     getHealthListSuccess,
     getHealthListFailure
 } from '../../actionCreators/Diarys/HealthListActionCreators';
-
-
-const instance = axios.create({
-    baseURL: 'http://127.0.0.1:8000/api/',
-    headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('access')
-    }
-});
+import { instance } from '../instance-api';
 
 export const getHealthList = () => async dispatch => {
-    await instance.get('MyHealth/')
+    await instance.get('MyHealth/', {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('access')
+        }
+    })
         .then((response) =>
             dispatch(getHealthListSuccess(response.data)))
         .catch((error) =>

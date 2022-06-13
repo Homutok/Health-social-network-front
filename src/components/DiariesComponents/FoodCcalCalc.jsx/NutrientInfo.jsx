@@ -13,7 +13,7 @@ const NutrientInfo = (props) => {
         setNutrientList(props.selectData[0])
         setLoading(!!props.selectData[0])
     }, [props.selectData])
-console.log(weightElement)
+
     return isLoad ? <>
         <Input
             style={{

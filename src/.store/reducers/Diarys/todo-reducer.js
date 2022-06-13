@@ -17,7 +17,7 @@ const todoReducer = (state = initalState, action) => {
                 isLoaded: true
             };
         case GET_TODO_FAILURE:
-            alert(action.payload)
+            console.log(action.payload)
             return { ...state }
         default:
             return state;

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {
     getDataListSuccess,
     getDataDetailSuccess,
@@ -8,16 +7,14 @@ import {
     deletePostSuccess,
     getDataFailure
 } from '../../actionCreators/Blog/BlogActionCreators';
-
-const instance = axios.create({
-    baseURL: 'http://127.0.0.1:8000/api/',
-    headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('access')
-    }
-});
+import { instance } from '../instance-api';
 
 export const getBlogDataList = () => async dispatch => {
-    await instance.get('Blog/')  
+    await instance.get('Blog/', {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('access')
+        }
+    })
         .then((response) =>
             dispatch(getDataListSuccess(response.data)))
         .catch((error) =>
@@ -25,7 +22,11 @@ export const getBlogDataList = () => async dispatch => {
 }
 
 export const getBlogDataDetail = (id) => async dispatch => {
-    await instance.get('Blog/' + id)
+    await instance.get('Blog/' + id, {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('access')
+        }
+    })
         .then((response) =>
             dispatch(getDataDetailSuccess(response.data)))
         .catch((error) =>
