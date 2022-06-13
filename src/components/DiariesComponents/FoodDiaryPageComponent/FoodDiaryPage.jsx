@@ -1,6 +1,4 @@
-import { Space } from "antd";
 import { useEffect, useState } from "react";
-import Loading from "../../OtherComponents/LoadingPage";
 import PageBreadCrumb from "../../OtherComponents/PageBreadCrumb"
 import FoodCcalCalcContainer from "../FoodCcalCalc.jsx/FoodCcalCalcContainer";
 

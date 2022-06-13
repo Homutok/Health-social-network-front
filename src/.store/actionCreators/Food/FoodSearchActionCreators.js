@@ -2,6 +2,7 @@ import {
     GET_FOOD_FAILURE,
     GET_FOOD_SUCCESS,
     SELECT_FOOD,
+    ADD_FOOD,
     DELETE_FOOD,
     RELOAD_FOOD
 } from "../../actions/Food/FoodSearchActions"
@@ -17,11 +18,15 @@ export const getFoodFailure = (error) => ({
     payload: error
 })
 
-export const selectFood = (data) => ({
+export const selectFood = (data, id) => ({
     type: SELECT_FOOD,
-    payload: data
+    payload: data,
+    index:id
 })
 
+export const addFood = () => ({
+    type: ADD_FOOD
+})
 export const deleteFood = (data) => ({
     type: DELETE_FOOD,
     payload: data

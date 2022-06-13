@@ -6,9 +6,10 @@ import { useEffect } from "react";
 const RemoveFoodButton = (props) => {
 
     useEffect(() => {
+
     }, [])
 
-    return <Button >
+    return <Button onClick={() => props.delete(props.id)}>
         <CloseCircleOutlined />
     </Button>
 

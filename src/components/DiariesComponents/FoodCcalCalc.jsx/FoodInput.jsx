@@ -1,6 +1,5 @@
-import { Card, Row } from "antd";
-import { useEffect} from "react";
-import AddFoodButton from "./AddFoodButton";
+import { Row } from "antd";
+import { useEffect } from "react";
 import FoodSelectItem from "./FoodSelectItem";
 import NutrientInfo from "./NutrientInfo";
 import RemoveFoodButton from "./RemoveFoodButton";
@@ -11,17 +10,16 @@ const FoodInput = (props) => {
 
     }, [props.data])
 
-    return <Card>
-        <Row>
-            <FoodSelectItem
-                data={props.data}
-                search={props.search}
-                select={props.select}
-            />
-            <NutrientInfo selectData={props.selectData}/>
-            {/* <AddFoodButton />
-            <RemoveFoodButton /> */}
-        </Row>
-    </Card>
+    return <Row>
+        <FoodSelectItem
+            id={props.id}
+            data={props.data}
+            search={props.search}
+            select={props.select}
+            selectData={props.selectData}
+        />
+        <NutrientInfo selectData={props.selectData} />
+        <RemoveFoodButton id={props.id} delete={props.deleteItem} />
+    </Row>
 }
 export default FoodInput

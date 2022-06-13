@@ -14,10 +14,10 @@ export const getFoodInfo = (data) => async dispatch => {
             dispatch(getFoodFailure(error)))
 }
 
-export const getFoodNutrients = (data) => async dispatch => {
+export const getFoodNutrients = (data, id) => async dispatch => {
     await instance.get('FoodNutrient/?search=' + data)
         .then((response) =>
-            dispatch(selectFood(response.data)))
+            dispatch(selectFood(response.data, id)))
         .catch((error) =>
             dispatch(getFoodFailure(error)))
 }

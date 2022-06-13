@@ -5,24 +5,27 @@ import { useEffect, useRef, useState } from "react";
 
 const NutrientInfo = (props) => {
     const [nutrientList, setNutrientList] = useState([]);
+    const [weight, setWeight] = useState(100);
     const [isLoad, setLoading] = useState(false);
 
     let weightElement = useRef(100);
 
     useEffect(() => {
-        setNutrientList(props.selectData[0])
+        setNutrientList(props.selectData)
         setLoading(!!props.selectData[0])
     }, [props.selectData])
 
     return isLoad ? <>
         <Input
             style={{
-                width: '15%'
+                width: '13%'
             }}
             key={'weight'}
             ref={weightElement}
             type="number"
             defaultValue={100}
+            prefix='Вес'
+            onChange={()=>{setWeight(weightElement.current.input.value)}}
         />
         {/* Сделать нормально, а не ленивым способом !!! */}
         <Input
@@ -30,7 +33,7 @@ const NutrientInfo = (props) => {
                 width: '12%'
             }}
             key={'protein'}
-            value={(nutrientList[0].amount) }
+            value={(nutrientList[0].amount)*weight/100}
             prefix='Белок'
             suffix="г" 
         />
@@ -38,8 +41,8 @@ const NutrientInfo = (props) => {
             style={{
                 width: '12%'
             }}
-            key={'	Total lipid (fat)'}
-            value={(nutrientList[1].amount)}
+            key={'Total lipid (fat)'}
+            value={(nutrientList[1].amount)*weight/100}
             prefix='Жиры'
             suffix="г" 
         />
@@ -48,7 +51,7 @@ const NutrientInfo = (props) => {
                 width: '13%'
             }}
             key={'	Carbohydrate'}
-            value={(nutrientList[2].amount) }
+            value={(nutrientList[2].amount)*weight/100}
             prefix='Углеводы'
             suffix="г" 
         />
@@ -57,14 +60,14 @@ const NutrientInfo = (props) => {
                 width: '15%'
             }}
             key={'Energy'}
-            value={(nutrientList[3].amount) }
+            value={(nutrientList[3].amount)*weight/100}
             prefix='Энергия'
             suffix="ккал" 
         />
     </>
         : <Input
             style={{
-                width: '15%'
+                width: '13%'
             }} 
             prefix={<LoadingOutlined/>}
             />

@@ -1,6 +1,6 @@
 import { PlusCircleOutlined } from "@ant-design/icons";
-import { Button, Card, Input, Row } from "antd";
-import { useEffect, useRef, useState } from "react";
+import { Button } from "antd";
+import { useEffect } from "react";
 
 
 const AddFoodButton = (props) => {
@@ -9,7 +9,7 @@ const AddFoodButton = (props) => {
 
     }, [])
 
-    return <Button >
+    return <Button onClick={props.addNew} >
         <PlusCircleOutlined />
     </Button>
 

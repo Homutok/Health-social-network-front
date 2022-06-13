@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { addFood, deleteFood } from '../../../.store/actionCreators/Food/FoodSearchActionCreators';
 import { getFoodInfo, getFoodNutrients } from '../../../.store/api/Food/food_search-api';
 import CalculatorComponent from './CalculatorComponent';
 
@@ -16,8 +17,14 @@ function mapDispatchToProps(dispatch) {
         change_search: (text) => {
             dispatch(getFoodInfo(text));
         },
-        get_food_info: (text) => {
-            dispatch(getFoodNutrients(text));
+        add_new_search: () => {
+            dispatch(addFood());
+        },
+        delete_search: (index) => {
+            dispatch(deleteFood(index));
+        },
+        get_food_info: (text, id) => {
+            dispatch(getFoodNutrients(text, id));
         },
     }
 }

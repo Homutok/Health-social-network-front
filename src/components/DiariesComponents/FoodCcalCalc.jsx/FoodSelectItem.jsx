@@ -17,7 +17,7 @@ const FoodSelectItem = (props) => {
     const onChangeSelectItem = (value) => {
         if (!!value) {
             const found = foodList.find(data => (data.value === value.value));
-            props.select(found.id)
+            props.select(found.id, props.id)
         }
         setFoodList([{ value: 'value', food_name: 'Идет загрузка...' }])
     }
