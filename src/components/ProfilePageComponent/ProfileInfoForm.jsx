@@ -31,7 +31,7 @@ const ProfileInfoForm = (props) => {
 
             actions={[
                 <SettingOutlined key="setting" onClick={() => navigate('/profile-setting')} />,
-                <EditOutlined key="edit" onClick={() => navigate('/edit')} />,
+                <EditOutlined key="edit" onClick={() => navigate('/settings-edit')} />,
             ]}
         >
             <Avatar
@@ -40,7 +40,7 @@ const ProfileInfoForm = (props) => {
                     height: '30%'
                 }}
                 src={profileImage}
-                onClick={() => navigate('/edit/image')}
+                onClick={() => navigate('/settings-edit/image')}
             />
 
             <ProfilePublicInfo

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { getToDoDataList } from '../../../.store/api/Diarys/todo-api';
+import { addToDoData, completeToDoData, deleteToDoData, getToDoDataList } from '../../../.store/api/Diarys/todo-api';
 import ToDoForm from './ToDoPage';
 
 function mapStateToProps(state) {
@@ -13,6 +13,15 @@ function mapDispatchToProps(dispatch) {
     return {
         getToDoInfo: () => {
             dispatch(getToDoDataList())
+        },
+        createNewToDo: (label, text) => {
+            dispatch(addToDoData(label, text))
+        },
+        deleteToDo: (id) => {
+            dispatch(deleteToDoData(id))
+        },
+        completeNewToDo: (id) => {
+            dispatch(completeToDoData(id))
         }
     }
 }

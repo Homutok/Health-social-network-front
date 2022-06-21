@@ -1,4 +1,6 @@
 import {
+    REGISTER_CONFIRM,
+    REGISTER_ERROR,
     LOGIN,
     LOGIN_ERROR,
     LOGIN_CHECK,
@@ -24,6 +26,10 @@ const loginReducer = (state = initalState, action) => {
             localStorage.setItem('access', action.payload.access)
             return { ...state, isAuthData: { ...action.payload, isAuth: true, errors: null, loadAuth: true } };
         case LOGIN_ERROR:
+            return { ...state, isAuthData: { ...action.payload, isAuth: false, loadAuth: false } };
+        case REGISTER_CONFIRM:
+            return { ...state, isAuthData: { isAuth: false, errors: null, loadAuth: true } };
+        case REGISTER_ERROR:
             return { ...state, isAuthData: { ...action.payload, isAuth: false, loadAuth: false } };
         case LOGIN_REFRESH:
             localStorage.setItem('refresh', action.payload.refresh)

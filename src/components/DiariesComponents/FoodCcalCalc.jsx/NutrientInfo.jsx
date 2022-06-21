@@ -1,6 +1,8 @@
 import { LoadingOutlined } from "@ant-design/icons";
 import { Input } from "antd";
 import { useEffect, useRef, useState } from "react";
+import { Nutrients } from "./NutrientsConst";
+import NutrientWeightInfo from "./NutrientWeightInfo";
 
 
 const NutrientInfo = (props) => {
@@ -11,9 +13,14 @@ const NutrientInfo = (props) => {
     let weightElement = useRef(100);
 
     useEffect(() => {
+        setWeight(props.weight)
         setNutrientList(props.selectData)
         setLoading(!!props.selectData[0])
-    }, [props.selectData])
+    }, [props.selectData, props.weight])
+
+    const changeInput = () => {
+        props.changeWeight(props.id, weightElement.current.input.value)
+    }
 
     return isLoad ? <>
         <Input
@@ -25,52 +32,28 @@ const NutrientInfo = (props) => {
             type="number"
             defaultValue={100}
             prefix='Вес'
-            onChange={()=>{setWeight(weightElement.current.input.value)}}
+            onChange={() => { changeInput() }}
         />
         {/* Сделать нормально, а не ленивым способом !!! */}
-        <Input
-            style={{
-                width: '12%'
-            }}
-            key={'protein'}
-            value={(nutrientList[0].amount)*weight/100}
-            prefix='Белок'
-            suffix="г" 
-        />
-        <Input
-            style={{
-                width: '12%'
-            }}
-            key={'Total lipid (fat)'}
-            value={(nutrientList[1].amount)*weight/100}
-            prefix='Жиры'
-            suffix="г" 
-        />
-        <Input
-            style={{
-                width: '13%'
-            }}
-            key={'	Carbohydrate'}
-            value={(nutrientList[2].amount)*weight/100}
-            prefix='Углеводы'
-            suffix="г" 
-        />
-        <Input
-            style={{
-                width: '15%'
-            }}
-            key={'Energy'}
-            value={(nutrientList[3].amount)*weight/100}
-            prefix='Энергия'
-            suffix="ккал" 
-        />
+        {
+            Nutrients.map((nutrient, index) => 
+                <NutrientWeightInfo
+                    key={nutrient.key}
+                    id={nutrient.key}
+                    name={nutrient.name}
+                    amount={nutrientList[index].amount}
+                    weight={weight}
+                    measure={nutrient.measure}
+                />
+            )
+        }
     </>
         : <Input
             style={{
                 width: '13%'
-            }} 
-            prefix={<LoadingOutlined/>}
-            />
+            }}
+            prefix={<LoadingOutlined />}
+        />
 
 }
 export default NutrientInfo

@@ -44,10 +44,10 @@ const items = [
     getItem('Новости', 'blog', <CompassOutlined />, [
         getItem('Все', 'all', < DingtalkOutlined />),
         getItem('Фитнес', 'fitnes', <FireOutlined />),
-        getItem('Рецепты', 'recipe', <CoffeeOutlined />),
+        getItem('Рецепты', 'diet', <CoffeeOutlined />),
     ]),
     getItem('Настройки', 'settings', <SettingOutlined />, [
-        getItem('Общие настройки', 'general', <BarsOutlined />),
+        getItem('Общие настройки', 'edit', <BarsOutlined />),
         getItem('Безопасность', 'security', <LockOutlined />),
     ]),
     getItem('Выход', 'exit', <PoweroffOutlined />),

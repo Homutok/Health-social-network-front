@@ -1,19 +1,28 @@
 import { DATA_ACHIEVEMENTS_SUCCESS } from "../../actions/User/AchievementsActions";
-import { DATA_LAST_HEALTH_FAILURE, DATA_LAST_HEALTH_SUCCESS } from "../../actions/User/HealthLastActions";
 import {
+    DATA_LAST_HEALTH_FAILURE,
+    DATA_LAST_HEALTH_SUCCESS
+} from "../../actions/User/HealthLastActions";
+
+import {
+    DATA_PROFILE_UPDATE_SUCCESS,
+    DATA_PROFILE_UPDATE_FAILURE,
     DATA_PROFILE_SUCCESS,
     DATA_PROFILE_FAILURE,
+    DATA_PROFILE_CLEAR,
 } from "../../actions/User/ProfileActions"
 
 
 let initalState = {
     dataProfile: [],
     dataAchievements: [],
+    dataLikes: [],
     dataHealth: {},
     isLoadedProfile: false,
     isLoadedAchievements: false,
     isLoadedHealth: false,
 }
+
 const profileReducer = (state = initalState, action) => {
     switch (action.type) {
         case DATA_PROFILE_SUCCESS:
@@ -23,7 +32,6 @@ const profileReducer = (state = initalState, action) => {
                 isLoadedProfile: true
             };
         case DATA_PROFILE_FAILURE:
-            alert(action.payload)
             return {
                 ...state,
                 isLoadedProfile: false
@@ -40,15 +48,56 @@ const profileReducer = (state = initalState, action) => {
                 isLoadedAchievements: false
             }
         case DATA_LAST_HEALTH_SUCCESS:
-            return {
-                ...state,
-                dataHealth: action.payload,
-                isLoadedHealth: true
-            }
+            let new_state = {}
+            action.payload.results.length === 0
+                ? new_state = {
+                    ...state,
+                    dataHealth: [],
+                    isLoadedHealth: false
+                }
+                : new_state = {
+                    ...state,
+                    dataHealth: action.payload,
+                    isLoadedHealth: true
+                }
+            return new_state
         case DATA_LAST_HEALTH_FAILURE:
             return {
                 ...state,
                 isLoadedHealth: false
+            }
+
+        case DATA_PROFILE_CLEAR:
+            return {
+                ...state,
+                dataProfile: [],
+                dataAchievements: [],
+                dataHealth: {},
+                isLoadedProfile: false,
+                isLoadedAchievements: false,
+                isLoadedHealth: false,
+            }
+
+        case DATA_PROFILE_UPDATE_SUCCESS:
+            return {
+                ...state,
+                dataProfile: [],
+                dataAchievements: [],
+                dataHealth: {},
+                isLoadedProfile: false,
+                isLoadedAchievements: false,
+                isLoadedHealth: false,
+            }
+
+        case DATA_PROFILE_UPDATE_FAILURE:
+            return {
+                ...state,
+                dataProfile: [],
+                dataAchievements: [],
+                dataHealth: {},
+                isLoadedProfile: false,
+                isLoadedAchievements: false,
+                isLoadedHealth: false,
             }
         default:
             return state;

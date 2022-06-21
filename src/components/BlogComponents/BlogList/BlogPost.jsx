@@ -33,8 +33,15 @@ const BlogPost = (props) => {
             <PostText postData={props.data} fulltext={false} />
         </Link>
         <Row>
-            <LikeButton />
-            <MoreButton />
+            <LikeButton
+                profileID={props.profileID}
+                id={props.data.id}
+                liked={props.data.liked}
+                userLiked={props.data.likes_for_post}
+                like={props.like}
+                unlike={props.unlike}
+            />
+                <MoreButton id={props.data.id} />
         </Row>
     </Card>
 }

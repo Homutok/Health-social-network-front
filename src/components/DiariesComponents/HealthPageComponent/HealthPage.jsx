@@ -19,6 +19,7 @@ const HealthStatPage = (props) => {
       child='Здоровье'
     >
       <HealthOfWeekList
+        posthealthInfo={props.posthealthInfo}
         data={props.healthOfWeek}
       />
       <HealthChartList

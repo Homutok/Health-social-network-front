@@ -3,18 +3,16 @@ import {
     loginUsersError,
     refreshUsersToken,
     verifyUsersSuccess,
-    verifyUsersError
+    verifyUsersError,
+    registerUsersSuccess,
+    registerUsersError
 } from '../../../actionCreators/User/LoginActionCreators';
 import { instance } from '../../instance-api';
 
 
 // Изменить аутентификакцию, т.к. локальное хранилище не обновляется, вызываясь лишь раз при загрузке страницы
 export const logIn = (data) => async dispatch => {
-    await instance.post('token/', {
-        headers: {
-            Authorization: 'Bearer ' + localStorage.getItem('access')
-        }
-    }, data)
+    await instance.post('token/', data)
         .then((response) =>
             dispatch(loginUsersSuccess(response.data)))
         .catch((error) =>
@@ -33,4 +31,11 @@ export const verify = () => async dispatch => {
                     dispatch(verifyUsersError(error))
                 })
         })
+}
+export const register = (data) => async dispatch => {
+    await instance.post('Register/', data)
+        .then((response) =>
+                dispatch(logIn(data)))
+        .catch((error) =>
+            dispatch(registerUsersError(error)))
 }

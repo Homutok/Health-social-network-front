@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Row, Col, Space, Image } from 'antd';
 import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 import CommentList from './PostCommentsList'
 import PostText from '../BlogList/BlogPostText';
 import LikeButton from '../BlogList/BlogButtonLike';
@@ -10,6 +9,7 @@ import CommentAdd from './PostCommentAdd';
 import EditPostButton from '../BlogActions/PostEditButton';
 import DeletePostButton from '../BlogActions/DeletePostButton';
 import PageBreadCrumb from '../../OtherComponents/PageBreadCrumb';
+import PostTagsView from './PostTagsView';
 
 const PostDetail = (props) => {
     const [post, setPost] = useState([]);
@@ -17,24 +17,29 @@ const PostDetail = (props) => {
 
     const id = useParams().id;
 
-    const navigate = useNavigate();
-
     useEffect(() => {
-
         props.loadData(id)
         setPost(props.post)
         setLoad(props.isLoadedCheck)
-    }
-        , [props.isLoadedCheck])
+    }, [props.isLoadedCheck])
 
-    return isLoaded ?
-        <PageBreadCrumb
-            parent='Блог'
-            child={post.id}
-        >
-            <Space direction='vertical' wrap style={{ width: '100%' }}>
+    const getUserAuthor = (id) =>
+        props.profilePosts.filter(post => post === id).length > 0
+
+
+    return <PageBreadCrumb
+        parent='Блог'
+        child={post.id}
+    >
+        {isLoaded
+            ? <Space direction='vertical' wrap style={{ width: '100%' }}>
                 <Row type="flex" justify="end" style={{ margin: '1%' }}>
-                    <DeletePostButton />
+                    {
+                        getUserAuthor(post.id) ?
+                            <DeletePostButton delete={props.postDelete} postId={post.id} />
+                            : <></>
+                    }
+
                 </Row>
                 <Row type="flex" justify="center" align="middle" key={post.id}>
                     <Card
@@ -58,18 +63,32 @@ const PostDetail = (props) => {
                     >
                         <PostText postData={post} fulltext={true} />
                         <Row>
-                            <LikeButton />
-                            <Col offset={10} >
-                                <EditPostButton />
-                            </Col>
+                            <LikeButton
+                                profileID={props.profileInfo}
+                                id={post.id}
+                                liked={post.liked}
+                                userLiked={post.likes_for_post}
+                                like={props.LikePost}
+                                unlike={props.unLikePost}
+                            />
+                            {/* <Col offset={10} >
+                                {
+                                    getUserAuthor(post.id) ?
+                                        <EditPostButton />
+                                        : <></>
+                                }
+
+                            </Col> */}
                         </Row>
+                        <PostTagsView tags={post.post_tags} />
                         <CommentList comments={post.comment} />
                         <hr />
-                        <CommentAdd />
+                        <CommentAdd postId={post.id} complete={props.completeComment} />
                     </Card>
                 </Row>
             </Space>
-        </PageBreadCrumb>
-        : <PostLoading />
+            : <PostLoading />
+        }
+    </PageBreadCrumb>
 }
 export default PostDetail

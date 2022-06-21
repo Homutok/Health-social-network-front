@@ -7,7 +7,7 @@ const DeletePostButton = (props) => {
     const navigate = useNavigate();
 
     const deletePost = () => {
-        // props.delete(props.postId, props.token)
+        props.delete(props.postId)
         navigate("/blog-all")
     }
     return <Button type="primary" shape="round" danger onClick={deletePost}>

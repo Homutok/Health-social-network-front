@@ -17,7 +17,6 @@ const photoReducer = (state = initalState, action) => {
                 isLoaded:true
             };
         case DATA_IMAGE_FAILURE:
-            alert(action.payload)
             return { ...state }
         default:
             return state;

@@ -1,8 +1,11 @@
 import { Card } from "antd";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const HealthForm = (props) => {
     const [healthInfo, setHealthInfo] = useState({});
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         props.isLoad ?
@@ -19,12 +22,15 @@ const HealthForm = (props) => {
             style={{
                 width: '40%',
             }}
+            onClick={() => { navigate('/diaries-health') }}
         >
-            <p><b>Дата измерения:</b> {healthInfo.date_of_check}</p>
-            <p><b>Шаги: </b>{healthInfo.person_steps_per_day}шагов</p>
-            <p><b>Вес:</b> {healthInfo.person_weight} кг</p>
-            <p><b>Пульс:</b> {healthInfo.person_pulse} ударов/мин</p>
-            <p><b>Сон:</b> {healthInfo.person_dream} часов</p>
+            <div onClick={() => { navigate('/diaries-health') }}>
+                <p><b>Дата измерения:</b> {healthInfo.date_of_check}</p>
+                <p><b>Шаги: </b>{healthInfo.person_steps_per_day}шагов</p>
+                <p><b>Вес:</b> {healthInfo.person_weight} кг</p>
+                <p><b>Пульс:</b> {healthInfo.person_pulse} ударов/мин</p>
+                <p><b>Сон:</b> {healthInfo.person_dream} часов</p>
+            </div>
         </Card>
         : <Card
             hoverable

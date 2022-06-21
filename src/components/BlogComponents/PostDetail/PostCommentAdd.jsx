@@ -5,9 +5,10 @@ import { PlayCircleOutlined } from '@ant-design/icons';
 const CommentAdd = (props) => {
 
     let newCommentElement = useRef(null);
+    
     const competeComment = () => {
         let text = newCommentElement.current.input.value;
-        props.complete(text, props.postId, props.token);
+        props.complete(text, props.postId);
         newCommentElement.current.input.value = props.newCommentTxt
     }
 

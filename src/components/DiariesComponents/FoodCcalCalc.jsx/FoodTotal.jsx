@@ -1,25 +1,29 @@
-import { Card, Input, Space } from "antd";
+import { Card, Input } from "antd";
 import { useEffect, useState } from "react";
 import AddFoodButton from "./AddFoodButton";
+import { Nutrients } from "./NutrientsConst";
+import NutrientWeightInfo from "./NutrientWeightInfo";
 
 const FoodTotal = (props) => {
 
-    const [isLoaded, setLoad] = useState(false);
     const [nutrients, setNutrients] = useState([]);
-
-    const { Meta } = Card;
+    const [weightTotal, setWeightTotal] = useState();
 
     useEffect(() => {
         let bufferItems = []
+
         props.selectData[0].map(() => bufferItems.push(0))
+
+        setWeightTotal(props.weights.reduce((acc, val) => +acc + +val, 0))
 
         props.selectData.map((selectFood) => {
             selectFood.map((Nutrients, index) => {
                 bufferItems[index] += Nutrients.amount
             })
-            setNutrients(bufferItems)
+
+            setNutrients(bufferItems.map((items) => items / props.selectData.length))
         })
-    }, [props.selectData])
+    }, [props.selectData, props.weights])
 
     return <Card>
         <Input
@@ -34,47 +38,22 @@ const FoodTotal = (props) => {
             style={{
                 width: '13%'
             }}
-            key={'weight'}
+            key={'weight-total'}
             prefix='Вес'
-            value={nutrients[0]}
+            value={weightTotal}
         />
-        {/* Сделать нормально, а не ленивым способом !!! */}
-        <Input
-            style={{
-                width: '12%'
-            }}
-            key={'protein'}
-            prefix='Белок'
-            suffix="г"
-            value={nutrients[0]}
-        />
-        <Input
-            style={{
-                width: '12%'
-            }}
-            key={'Total lipid (fat)'}
-            prefix='Жиры'
-            suffix="г"
-            value={nutrients[1]}
-        />
-        <Input
-            style={{
-                width: '13%'
-            }}
-            key={'	Carbohydrate'}
-            prefix='Углеводы'
-            suffix="г"
-            value={nutrients[2]}
-        />
-        <Input
-            style={{
-                width: '15%'
-            }}
-            key={'Energy'}
-            prefix='Энергия'
-            suffix="ккал"
-            value={nutrients[3]}
-        />
+        {
+            Nutrients.map((nutrient, index) =>
+                <NutrientWeightInfo
+                    key={nutrient.key + '-total'}
+                    id={nutrient.key + '-total'}
+                    name={nutrient.name}
+                    amount={nutrients[index]}
+                    weight={weightTotal}
+                    measure={nutrient.measure}
+                />
+            )
+        }
         <AddFoodButton addNew={props.addNew} />
     </Card>
 }

@@ -1,4 +1,7 @@
 import {
+    REGISTER,
+    REGISTER_CONFIRM,
+    REGISTER_ERROR,
     LOGIN,
     LOGIN_ERROR,
     LOGIN_CONFIRM,
@@ -45,4 +48,17 @@ export const logout = () => ({
 
 export const loginConfirm = () => ({
     type: LOGIN_CONFIRM,
+})
+
+export const registerUsersSuccess = (data) => ({
+    type: REGISTER_CONFIRM,
+    payload: {
+        refresh: data.refresh,
+        access: data.access
+    }
+})
+
+export const registerUsersError = (error) => ({
+    type: REGISTER_ERROR,
+    payload: { error: error }
 })

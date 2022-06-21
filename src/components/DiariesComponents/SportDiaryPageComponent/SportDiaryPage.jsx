@@ -1,70 +1,52 @@
-import { Alert, Calendar, Table } from "antd";
+import { Table } from "antd";
+import { useEffect, useState } from "react";
 import PageBreadCrumb from "../../OtherComponents/PageBreadCrumb";
+import ExerciseActions from "./ExerciseActions";
+import ExerciseView from "./ExerciseView";
+import { columns, days } from "./SportDiaryConstants";
 
+const SportDiaryForm = (props) => {
+    const [data, setData] = useState([])
+    const [editable, setEditable] = useState(true)
 
+    useEffect(() => {
+        props.isLoad
+            ? setDataToDays()
+            : props.get_sports_info()
+    }, [props.isLoad, props.sportList, editable])
 
-const SportDiaryForm = () => {
-    const columns = [
-        {
-            title: 'Пнонедельник',
-            dataIndex: 'Monday',
-        },
-        {
-            title: 'Вторник.',
-            dataIndex: 'Tuesday',
-        },
-        {
-            title: 'Среда',
-            dataIndex: 'Wednesday',
-        },
-        {
-            title: 'Четверг',
-            dataIndex: 'Thursday',
-        },
-        {
-            title: 'Пятница',
-            dataIndex: 'Friday',
-        },
-        {
-            title: 'Суббота',
-            dataIndex: 'Saturday',
-        },
-        {
-            title: 'Воскресенье',
-            dataIndex: 'Sunday',
-        },
-    ];
-    const data = [
-        {
-          key: '1',
-          Monday: <Alert type="success" message='Бег'/>,
-          Friday: <Alert message='Плавание'></Alert>,
-          Sunday: 'Тяжелая атлетика',
-        },
-        {
-            key: '2',
-            Wednesday: 'Бег',
-            Tuesday: <Alert type="success" message='Плавание'></Alert>,
-            Saturday: 'Тяжелая атлетика',
-        },
-        {
-            key: '3',
-            Wednesday: 'Бег',
-            Friday: 'Плавание',
-            Saturday: <Alert message='Плавание'></Alert>,
-        },
-        {
-            key: '4',
-            Monday: 'Бег',
-            Friday: <Alert message='Плавание'></Alert>,
-            Saturday: 'Тяжелая атлетика',
-        },
-    ];
+    const showEdit = () => {
+        setEditable(true)
+    }
+    const hideEdit = () => {
+        setEditable(false)
+    }
+
+    const setDataToDays = () => {
+        setData(days.map((day) => ({
+            key: day['key'],
+            Days: day['name'],
+            Exercise: <ExerciseView
+                dataList={props.sportList[day['key']]}
+                hideEdit={hideEdit}
+                editable={editable}
+                deleteExercise={props.delete_sports_info}
+            />,
+            actions: <ExerciseActions
+                editable={editable}
+                showEdit={showEdit}
+                hideEdit={hideEdit}
+                id={day['key']}
+                addExercise={props.add_sports_info}
+            />
+        })))
+    }
+
     return <PageBreadCrumb
         parent='Дневники'
         child='Дневник тренировок'
     >
-        <Table columns={columns} dataSource={data}/>;
+        <Table columns={columns} dataSource={data} />;
     </PageBreadCrumb>;
 }
 export default SportDiaryForm

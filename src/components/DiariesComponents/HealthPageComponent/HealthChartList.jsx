@@ -10,7 +10,7 @@ const HealthChartList = (props) => {
 
     useEffect(() => {
         setDataOfHealth(props.data)
-    }, [props.isLoad])
+    }, [props.data])
 
     return <Collapse>
         {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Card, Input, Space, Button, Tooltip, notification, Row } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone, UserOutlined, LockOutlined, InfoCircleOutlined, WarningOutlined } from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = (props) => {
     const [errorStatus, setStatusError] = useState([]);
@@ -31,7 +31,7 @@ const Login = (props) => {
         <Row type="flex" justify="center" align="middle" >
             <Card
                 hoverable
-                title="Login"
+                title="Авторизация"
                 align="middle"
                 style={{
                     width: '50%',
@@ -64,9 +64,14 @@ const Login = (props) => {
                         }}
                         onClick={login}
                     >
-                        Login
+                        Войти
                     </Button>
                 </Input.Group>
+                <Row> Если у вас нет аккаунта, то вы можете
+                    <Link to={'/register'}>
+                        зарегистрироваться
+                    </Link>
+                </Row>
             </Card>
         </Row>
     </Space>

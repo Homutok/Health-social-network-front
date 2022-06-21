@@ -7,4 +7,4 @@ export const instance = axios.create({
 
 axiosRetry(instance, { retryDelay: (retryCount) => {
     return retryCount * 1000;
-  }});
+  }}, { retries: 3 });

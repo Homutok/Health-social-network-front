@@ -18,8 +18,14 @@ const FoodInput = (props) => {
             select={props.select}
             selectData={props.selectData}
         />
-        <NutrientInfo selectData={props.selectData} />
-        <RemoveFoodButton id={props.id} delete={props.deleteItem} />
+        <NutrientInfo
+            id={props.id}
+            weight={props.weight}
+            selectData={props.selectData}
+            changeWeight={props.changeWeight} />
+        <RemoveFoodButton
+            id={props.id}
+            delete={props.deleteItem} />
     </Row>
 }
 export default FoodInput

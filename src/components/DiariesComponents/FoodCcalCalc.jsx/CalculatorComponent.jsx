@@ -1,6 +1,5 @@
-import { Card, Space } from "antd";
-import { useEffect, useState } from "react";
-import AddFoodButton from "./AddFoodButton";
+import { Card } from "antd";
+import { useEffect } from "react";
 import FoodInput from "./FoodInput";
 import FoodTotal from "./FoodTotal";
 
@@ -23,9 +22,14 @@ const CalculatorComponent = (props) => {
                     search={props.change_search}
                     select={props.get_food_info}
                     deleteItem={props.delete_search}
+                    weight={props.weightList[index]}
+                    changeWeight={props.change_weight}
                 />)}
         </Card>
-        <FoodTotal addNew={props.add_new_search} selectData={props.selectedItems}/>
+        <FoodTotal
+            weights={props.weightList}
+            addNew={props.add_new_search}
+            selectData={props.selectedItems} />
     </Card>
 }
 export default CalculatorComponent

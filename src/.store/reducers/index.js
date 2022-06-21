@@ -6,6 +6,7 @@ import profileReducer from './User/profile-reducer'
 import todoReducer from './Diarys/todo-reducer'
 import healthReducer from './Diarys/health_list-reducer'
 import foodReducer from './Food/food-reducer'
+import sportDiaryReducer from './Diarys/sport_diary-reducer'
 
 export default combineReducers({
     blog: blogReducer,
@@ -14,6 +15,7 @@ export default combineReducers({
     todo: todoReducer,
     login: loginReducer,
     health: healthReducer,
-    food:foodReducer,
-    blog:blogReducer
+    food: foodReducer,
+    blog: blogReducer,
+    sportDiary: sportDiaryReducer
 })

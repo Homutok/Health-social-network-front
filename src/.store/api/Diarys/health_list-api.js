@@ -15,3 +15,15 @@ export const getHealthList = () => async dispatch => {
         .catch((error) =>
             dispatch(getHealthListFailure(error)))
 }
+
+export const postHealth = (data) => async dispatch => {
+    await instance.post('MyHealth/', data, {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('access')
+        }
+    })
+        .then(() =>
+            dispatch(getHealthList()))
+        .catch((error) =>
+            dispatch(getHealthListFailure(error)))
+}

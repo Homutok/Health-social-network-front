@@ -4,7 +4,7 @@ import {
 } from "../../actions/Diarys/HealthListActions"
 
 let initalState = {
-    healthPerWeekList: [],
+    healthPerWeekList: [[]],
     healthDataArray: [
         {
             title: "Вес",
@@ -40,7 +40,6 @@ const healthReducer = (state = initalState, action) => {
                 isLoaded: true
             };
         case GET_HEALTH_DATA_FAILURE:
-            alert(action.payload)
             return { ...state, isLoaded: false }
         default:
             return state;

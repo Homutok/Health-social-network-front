@@ -56,3 +56,8 @@ export const getDataFailure = (error) => ({
 export const toggleLikePost = () => ({
     type: TOGGLE_LIKE_POST_SUCCESS
 })
+
+export const getikePost = (id) => ({
+    type: GET_LIKE_POST_SUCCESS,
+    payload: id
+})

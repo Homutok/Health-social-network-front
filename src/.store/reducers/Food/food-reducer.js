@@ -4,10 +4,12 @@ import {
     GET_FOOD_FAILURE,
     GET_FOOD_SUCCESS,
     RELOAD_FOOD,
-    SELECT_FOOD
+    SELECT_FOOD,
+    CHANGE_FOOD_WEIGHT
 } from "../../actions/Food/FoodSearchActions";
 
 let initalState = {
+    totalWeight: [100],
     foodList: [],
     selectedFoodList: [[]],
     isLoaded: false
@@ -34,6 +36,9 @@ const foodReducer = (state = initalState, action) => {
         case ADD_FOOD:
             return {
                 ...state,
+                totalWeight: [
+                    ...state.totalWeight, 100
+                ],
                 selectedFoodList: [
                     ...state.selectedFoodList, []
                 ]
@@ -42,11 +47,23 @@ const foodReducer = (state = initalState, action) => {
             if (state.selectedFoodList.length > 1)
                 return {
                     ...state,
+                    totalWeight: [
+                        ...state.totalWeight.slice(0, action.payload),
+                        ...state.totalWeight.slice(action.payload + 1)
+                    ],
                     selectedFoodList: [
                         ...state.selectedFoodList.slice(0, action.payload),
                         ...state.selectedFoodList.slice(action.payload + 1)
                     ]
                 }
+        case CHANGE_FOOD_WEIGHT:
+            state.totalWeight[action.payload.index] = action.payload.data
+            return {
+                ...state,
+                totalWeight: [
+                    ...state.totalWeight
+                ]
+            }
         case RELOAD_FOOD:
             return { ...state, isLoaded: false }
         default:

@@ -1,11 +1,12 @@
 import { connect } from 'react-redux';
-import { addFood, deleteFood } from '../../../.store/actionCreators/Food/FoodSearchActionCreators';
+import { addFood, changeWeightFood, deleteFood } from '../../../.store/actionCreators/Food/FoodSearchActionCreators';
 import { getFoodInfo, getFoodNutrients } from '../../../.store/api/Food/food_search-api';
 import CalculatorComponent from './CalculatorComponent';
 
 
 function mapStateToProps(state) {
     return {
+        weightList: state.food.totalWeight,
         dataList: state.food.foodList,
         selectedItems: state.food.selectedFoodList,
         isLoad: state.food.isLoaded
@@ -14,6 +15,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        change_weight: (id, weight) => {
+            dispatch(changeWeightFood(id, weight));
+        },
         change_search: (text) => {
             dispatch(getFoodInfo(text));
         },
